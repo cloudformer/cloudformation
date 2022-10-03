@@ -38,5 +38,34 @@
    }
 }
   },
-  
+  "Outputs" : {
+    "Outputs1" : {
+      "Description": "The AZ is",
+      "Value" : { "Ref" : "inputaz" }
+    },
+    "Outputs2" : {
+      "Description": "The Key of my EC2",
+      "Value" : { "Ref" : "myKeyPair" }
+    },
+    "Outputs3" : {
+      "Description": "The VPC ID",
+      "Value" : { "Ref" : "myVPC" }
+    },
+    "Outputs4" : {
+      "Description": "The Subnet",
+      "Value" : { "Ref" : "mySubnet" }
+    },
+    "Outputs5" : {
+      "Description": "The Subnet",
+      "Value" : { "Fn::GetAtt" : [ "myVPC", "CidrBlock" ]
+      }
+    },
+    "Outputs6" : {
+     "Description" : "The ID of the VPC",
+     "Value" : { "Ref" : "myVPC" },
+     "Export" : {
+       "Name" : {"Fn::Sub": "${AWS::StackName}-VPCID" }
+    }
+  }
+  }
 }
