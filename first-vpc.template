@@ -1,0 +1,42 @@
+{
+  "AWSTemplateFormatVersion": "2010-09-09",
+  "Description": "",
+  "Parameters" : {
+    "myKeyPair": {
+     "Description": "Amazon EC2 Key Pair",
+     "Type": "AWS::EC2::KeyPair::KeyName"
+  },
+    "inputaz": {
+     "Description": "Amazon EC2 AZ",
+     "Type": "AWS::EC2::AvailabilityZone::Name"
+  }
+},
+  "Resources": {
+    "myVPC": {
+      "Type": "AWS::EC2::VPC",
+      "Properties": {
+        "CidrBlock": "10.15.0.0/16",
+        "EnableDnsSupport": "true",
+        "EnableDnsHostnames": "true",
+        "Tags": [
+          {
+            "Key": "Name",
+            "Value": "study-cf1"
+          }
+        ]
+      }
+    },
+    "mySubnet" : {
+      "Type" : "AWS::EC2::Subnet",
+      "Properties" : {
+      "VpcId" : { "Ref" : "myVPC" },
+      "CidrBlock" : "10.15.1.0/24",
+      "AvailabilityZone" : { "Ref" : "inputaz" },
+      "Tags" : [ { "Key" : "stack", "Value" : "production" } ,
+                 { "Key" : "Name", "Value" : "first-ref" }
+      ]
+   }
+}
+  },
+  
+}
