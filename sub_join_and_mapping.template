@@ -29,7 +29,7 @@
   },
   "Outputs" : {
     "Outputssub1": {
-      "Description": "output_paramater_only_string",
+      "Description": "output_only_string",
       "Value": {
         "Fn::Sub" :  only_string
       }
@@ -41,19 +41,19 @@
       }
     },
     "Outputssub3": {
-      "Description": "output_paramater_only_string",
+      "Description": "output_sub",
       "Value": {
         "Fn::Sub": "abc${AWS::AccountId}:vpc/${myVPC}"
       }
     },
-    "Outputssub4": {
-      "Description": "output_paramater_only_string",
+    "Outputsmapping4": {
+      "Description": "output_mapping_info",
       "Value": {
         "Fn::FindInMap" : [ "contact",  "mary" , "telnumber"]
       }
     },
-    "Outputssub5": {
-      "Description": "output_paramater_only_string",
+    "Outputsjoin5": {
+      "Description": "output_join_string_and_parameter",
       "Value": {
         "Fn::Join" : [ "", [ "arn:",
                              {"Ref": "AWS::AccountId"},
