@@ -1,0 +1,68 @@
+{
+  "AWSTemplateFormatVersion" : "2010-09-09",
+
+  "Description" : "",
+  "Mappings" : {
+    "contact" : {
+      "tom"        : {"address" : "tom-0ff8a91507f77f867", "telnumber" : "tom-13366668888"},
+      "mary"       : {"address" : "mary-0bdb828fd58c52235", "telnumber" : "mary-13911223388"},
+      "jerry"      : {"address" : "jerry-047bb4163c506cd98", "telnumber" : "jerry-15899990000"},
+      "lemmo"      : {"address" : "lemmo-06cd52961ce9f0d85", "telnumber" : "lemmo-12345"},
+      "cici"       : {"address" : "cici-08569b978cc4dfa10", "telnumber" : "cici-9876543210"}
+    }
+  },
+  "Resources": {
+    "myVPC": {
+      "Type": "AWS::EC2::VPC",
+      "Properties": {
+        "CidrBlock": "10.15.0.0/16",
+        "EnableDnsSupport": "true",
+        "EnableDnsHostnames": "true",
+        "Tags": [
+          {
+            "Key": "Name",
+            "Value": "study-cf1"
+          }
+        ]
+      }
+    }
+  },
+  "Outputs" : {
+    "Outputssub1": {
+      "Description": "output_paramater_only_string",
+      "Value": {
+        "Fn::Sub" :  only_string
+      }
+    },
+    "Outputssub2": {
+      "Description": "output_paramater",
+      "Value": {
+        "Fn::Sub" :  "${AWS::StackName}-VPCID"
+      }
+    },
+    "Outputssub3": {
+      "Description": "output_paramater_only_string",
+      "Value": {
+        "Fn::Sub": "abc${AWS::AccountId}:vpc/${myVPC}"
+      }
+    },
+    "Outputssub4": {
+      "Description": "output_paramater_only_string",
+      "Value": {
+        "Fn::FindInMap" : [ "contact",  "mary" , "telnumber"]
+      }
+    },
+    "Outputssub5": {
+      "Description": "output_paramater_only_string",
+      "Value": {
+        "Fn::Join" : [ "", [ "arn:",
+                             {"Ref": "AWS::AccountId"},
+                              "-",
+                             {"Ref": "AWS::Region"},
+                             "-end"
+        ] ]
+      }
+    },
+  }
+
+}
